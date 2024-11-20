@@ -16,13 +16,13 @@ struct ContentView: View {
                 Text("Phonebooth")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(.brown)
+                    .foregroundColor(.black)
                     .padding(.bottom, 4)
                 
                 // Subtitle
                 Text("Voices that click. Matches that stick.")
                     .font(.subheadline)
-                    .foregroundColor(.brown)
+                    .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 40)
                 
@@ -56,7 +56,7 @@ struct ContentView: View {
                 }) {
                     Text("Sign In")
                         .font(.subheadline)
-                        .foregroundColor(.brown)
+                        .foregroundColor(.black)
                 }
                 .padding(.top, 10)
                 

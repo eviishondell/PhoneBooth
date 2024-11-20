@@ -6,7 +6,7 @@ struct IntroduceYourselfView: View {
     @State private var navigateToPlayback = false // Tracks navigation state
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             VStack {
                 // Navigation Bar
                 HStack {
@@ -111,7 +111,7 @@ struct IntroduceYourselfView: View {
                 )
             )
             .ignoresSafeArea()
-        }
+//        }
     }
 }
 

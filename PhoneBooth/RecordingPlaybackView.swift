@@ -11,17 +11,17 @@ struct RecordingPlaybackView: View {
     @State private var navigateToColorSelection = false // State to trigger navigation
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             VStack {
                 // Navigation Bar
                 HStack {
-//                    Button(action: {
-//                        // Back button action (optional)
-//                    }) {
-//                        Image(systemName: "chevron.left")
-//                            .foregroundColor(.red)
-//                            .font(.system(size: 18))
-//                    }
+                    Button(action: {
+                        // Back button action (optional)
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.red)
+                            .font(.system(size: 18))
+                    }
                     Spacer()
                     Text("Introduce Yourself")
                         .font(.headline)
@@ -121,7 +121,7 @@ struct RecordingPlaybackView: View {
                 )
             )
             .ignoresSafeArea()
-        }
+//        }
     }
 }
 
