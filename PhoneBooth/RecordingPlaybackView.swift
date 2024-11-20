@@ -7,16 +7,19 @@
 import SwiftUI
 
 struct RecordingPlaybackView: View {
+    @Environment(\.presentationMode) var presentationMode // Access presentationMode
+
     var recordingDuration: String = "01:29" // Example duration
     @State private var navigateToColorSelection = false // State to trigger navigation
 
     var body: some View {
-//        NavigationView {
             VStack {
                 // Navigation Bar
                 HStack {
                     Button(action: {
                         // Back button action (optional)
+                        presentationMode.wrappedValue.dismiss() // Go back to the previous view
+
                     }) {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.red)
@@ -113,6 +116,7 @@ struct RecordingPlaybackView: View {
                 }
                 .hidden() // Hide the NavigationLink
             }
+            .navigationBarBackButtonHidden(true)
             .background(
                 LinearGradient(
                     gradient: Gradient(colors: [Color(white: 1.0), Color(white: 0.95)]),
@@ -120,8 +124,6 @@ struct RecordingPlaybackView: View {
                     endPoint: .bottom
                 )
             )
-            .ignoresSafeArea()
-//        }
     }
 }
 

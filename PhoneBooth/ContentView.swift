@@ -22,7 +22,7 @@ struct ContentView: View {
                 // Subtitle
                 Text("Voices that click. Matches that stick.")
                     .font(.subheadline)
-                    .foregroundColor(.black)
+                    .foregroundColor(.gray)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 40)
                 
@@ -69,7 +69,6 @@ struct ContentView: View {
                     endPoint: .bottom
                 )
             )
-            .ignoresSafeArea()
         }
     }
 }

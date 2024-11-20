@@ -2,27 +2,27 @@ import SwiftUI
 import SwiftUI
 
 struct IntroduceYourselfView: View {
+    @Environment(\.presentationMode) var presentationMode // Access presentationMode
     @State private var isRecording = false // Tracks recording state
     @State private var navigateToPlayback = false // Tracks navigation state
 
     var body: some View {
-//        NavigationView {
             VStack {
                 // Navigation Bar
                 HStack {
-//                    Button(action: {
-//                        // Back button action (optional)
-//                    }) {
-//                        Image(systemName: "chevron.left")
-//                            .foregroundColor(.red)
-//                            .font(.system(size: 18))
-//                    }
+                    Button(action: {
+                        // Back button action
+                        presentationMode.wrappedValue.dismiss() // Go back to the previous view
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.red)
+                            .font(.system(size: 18))
+                    }
                     Spacer()
                     Text("Introduce Yourself")
                         .font(.headline)
                         .foregroundColor(.black)
                     Spacer()
-                    Spacer() // Placeholder to center the title
                 }
                 .padding()
 
@@ -103,6 +103,7 @@ struct IntroduceYourselfView: View {
                 }
                 .hidden()
             }
+            .navigationBarBackButtonHidden(true)
             .background(
                 LinearGradient(
                     gradient: Gradient(colors: [Color(white: 1.0), Color(white: 0.95)]),
@@ -110,8 +111,6 @@ struct IntroduceYourselfView: View {
                     endPoint: .bottom
                 )
             )
-            .ignoresSafeArea()
-//        }
     }
 }
 
