@@ -201,7 +201,7 @@ struct ExploreView: View {
             Divider()
             TabView {
                 HStack(alignment: .center, spacing: 16) {
-                    Image("ExploreTab")
+                     Image("ExploreTab")
                     .tabItem {
                         
                     }
