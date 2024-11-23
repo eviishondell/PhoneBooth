@@ -20,7 +20,9 @@ struct ExploreView: View {
     let promptCards = [1, 2, 3, 4, 5, 6] // Array to generate 6 prompt cards
     
 //    let colors = ["#4069AB", "#3CA05B", "#D3723D", "#F27BAB", "#6957B6", "#C45353"] //Array of Colors
-    let colors = ["ipod-Blue", "ipod-Green", "ipod-Orange", "ipod-Pink", "ipod-Blue", "#ipod-Red"] //Array of Colors
+    let colors = ["ipod-Blue", "ipod-Green", "ipod-Orange", "ipod-Pink", "ipod-Purple", "ipod-Red"] //Array of Colors
+    
+    let names = ["Jason", "Laurene", "David", "Ares", "Zeus", "Zagreus"]
 
     var body: some View {
         NavigationView {
@@ -62,7 +64,7 @@ struct ExploreView: View {
                                         //Information
                                         HStack(alignment: .center){
                                             VStack(alignment: .leading) {
-                                                Text("Laurene")
+                                                Text("\(names[index])")
                                                     .font(.title2)
                                                     .fontWeight(.bold)
                                                     .foregroundColor(.white)
