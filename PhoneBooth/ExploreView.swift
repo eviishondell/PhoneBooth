@@ -78,7 +78,10 @@ struct ExploreView: View {
                                             }
                                             .frame(width:186, alignment: .topLeading)
                                             
-                                            ZStack{
+                                            //Speed Change Button
+                                            Button(action: {
+                                                
+                                            }){ZStack{
                                                 Circle()
                                                     .fill(Color.white.opacity(0.08))
                                                     .frame(width: 50, height: 50)
@@ -87,8 +90,7 @@ struct ExploreView: View {
                                                     .fontWeight(.bold)
                                                     .foregroundColor(.white)
                                                 
-                                            }
-                                            
+                                            }}
                                         }
                                         .padding(.bottom, 20)
                                         
@@ -200,7 +202,7 @@ struct ExploreView: View {
             //sSpacer()
             Divider()
             TabView {
-                HStack(alignment: .center, spacing: 16) {
+                HStack(alignment: .top, spacing: 16) {
                     Image("ExploreTab")
                     .tabItem {
                         
@@ -232,12 +234,8 @@ struct ExploreView: View {
         )
         .ignoresSafeArea()
         
-        
     }
-    
     }
-
-
 }
 
 struct ExploreView_Previews: PreviewProvider {
