@@ -165,20 +165,18 @@ struct ExploreView: View {
 
             // View Profile and Reply Buttons
             HStack {
-                Button(action: {
-                    // View Profile  action
-                }) {
-                    HStack {
-                        
+
+                HStack {
+                    NavigationLink(destination: ProfileView()) {
                         Text("View Profile")
                             .fontWeight(.bold)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.pink.opacity(0.2))
+                            .foregroundColor(.red)
+                            .cornerRadius(10)
                     }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.pink.opacity(0.2))
-                    .foregroundColor(.red)
-                    .cornerRadius(10)
-                }
+                
 
                 Button(action: {
                     // Confirm action for the selected color
@@ -201,25 +199,30 @@ struct ExploreView: View {
             Divider()
             TabView {
                 HStack(alignment: .center, spacing: 16) {
-                     Image("ExploreTab")
-                    .tabItem {
-                        
+                    NavigationLink(destination: ChatsView()){
+                        Image("ExploreTab")
+                            .tabItem {
+                                
+                            }
+                            .tag(0)
                     }
-                    .tag(0)
-                    
-                    Image("Chats")
-                    .tabItem {
-                    
+                    NavigationLink(destination: ChatsView()){
+                        Image("Chats")
+                            .tabItem {
+                                
+                            }
+                            .tag(1)
                     }
-                    .tag(1)
                     
-                    Image("Profile")
-                    .tabItem {
-                        
+                    NavigationLink(destination: ChatsView()){
+                        Image("Profile")
+                            .tabItem {
+                                
+                            }
+                            .tag(2)
                     }
-                    .tag(2)
                 }
-                .padding(.top, 12)
+                .padding(.top, 23)
             
             }
             .frame(width: 390.0, height: 99.0)
