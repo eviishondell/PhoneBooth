@@ -20,7 +20,7 @@ struct ChatView: View {
     @State private var confirmBeforeReply: Bool = false // Tracks whether the Record button has been sent after pressing reply
     
     @State private var sentRecordings = [""]
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -50,21 +50,21 @@ struct ChatView: View {
                 ) {
                     VStack(spacing: 16) {
                         //VStack(alignment: .leading, spacing: 16){
-                            Image("VoiceChats")
+                        Image("VoiceChats")
+                            .padding(.trailing, 48)
+                            .frame(width: 294, height: 62)
+                        Image("YourChats")
+                            .padding(.leading, 48)
+                            .frame(width: 294, height: 62)
+                        Button(action: {
+                            // Change Image to "PlayedVoiceChats"
+                            isVoiceChatPlayed.toggle()
+                        }) {
+                            Image(isVoiceChatPlayed ? "PlayedVoiceChats" : "UnPlayedVoiceChats")
                                 .padding(.trailing, 48)
-                                .frame(width: 294, height: 62)
-                            Image("YourChats")
-                                .padding(.leading, 48)
-                                .frame(width: 294, height: 62)
-                            Button(action: {
-                                // Change Image to "PlayedVoiceChats"
-                                    isVoiceChatPlayed.toggle()
-                                                        }) {
-                                            Image(isVoiceChatPlayed ? "PlayedVoiceChats" : "UnPlayedVoiceChats")
-                                        .padding(.trailing, 48)
-                                        .frame(width: 294,
-                                               height: isVoiceChatPlayed ? 126 : 62)
-                                    }
+                                .frame(width: 294,
+                                       height: isVoiceChatPlayed ? 126 : 62)
+                        }
                         
                         // ForEach Loop for Sent Recordings
                         ForEach(sentRecordings, id: \.self) { recording in
@@ -74,33 +74,33 @@ struct ChatView: View {
                                     .frame(width: 294, height: 62)
                             }
                         }
-
-
+                        
+                        
                         //}
-//                        .padding(0)
-//                        .frame(width: 390, height: 844, alignment: .top)
-//                        .background(
-//                        LinearGradient(
-//                        stops: [
-//                        Gradient.Stop(color: Color(red: 0.94, green: 0.92, blue: 0.91), location: 0.00),
-//                        Gradient.Stop(color: Color(red: 0.96, green: 0.89, blue: 0.84), location: 1.00),
-//                        ],
-//                        startPoint: UnitPoint(x: 0.5, y: 0),
-//                        endPoint: UnitPoint(x: 0.5, y: 1)
-//                        )
-//                        )
+                        //                        .padding(0)
+                        //                        .frame(width: 390, height: 844, alignment: .top)
+                        //                        .background(
+                        //                        LinearGradient(
+                        //                        stops: [
+                        //                        Gradient.Stop(color: Color(red: 0.94, green: 0.92, blue: 0.91), location: 0.00),
+                        //                        Gradient.Stop(color: Color(red: 0.96, green: 0.89, blue: 0.84), location: 1.00),
+                        //                        ],
+                        //                        startPoint: UnitPoint(x: 0.5, y: 0),
+                        //                        endPoint: UnitPoint(x: 0.5, y: 1)
+                        //                        )
+                        //                        )
                     }
                     .padding(0)
                     .frame(width: 390, height: 844, alignment: .top)
                     .background(
-                    LinearGradient(
-                    stops: [
-                    Gradient.Stop(color: Color(red: 0.94, green: 0.92, blue: 0.91), location: 0.00),
-                    Gradient.Stop(color: Color(red: 0.96, green: 0.89, blue: 0.84), location: 1.00),
-                    ],
-                    startPoint: UnitPoint(x: 0.5, y: 0),
-                    endPoint: UnitPoint(x: 0.5, y: 1)
-                    )
+                        LinearGradient(
+                            stops: [
+                                Gradient.Stop(color: Color(red: 0.94, green: 0.92, blue: 0.91), location: 0.00),
+                                Gradient.Stop(color: Color(red: 0.96, green: 0.89, blue: 0.84), location: 1.00),
+                            ],
+                            startPoint: UnitPoint(x: 0.5, y: 0),
+                            endPoint: UnitPoint(x: 0.5, y: 1)
+                        )
                     )
                     
                     .scrollTargetLayout()
@@ -114,19 +114,19 @@ struct ChatView: View {
                 VStack(alignment: .center, spacing: 12) {
                     
                     // Animated Recording Visual
-                    if isRecordingReply{ZStack {
+                    if wantsToRecordReply{ZStack {
                         if(confirmBeforeReply){
                             Image("YourChats")
-                                //.padding(.leading , 28)
+                            //.padding(.leading , 28)
                                 .frame(width: 294, height: 62)
                         }
                         else{
                             if isRecordingReply {
                                 Image(systemName: "record.circle.fill")
                                     .scaleEffect(4)
-                                    .symbolEffect(.bounce, options: .speed(0.1) .repeating)
+                                    .symbolEffect(.bounce, options: .speed(0.01) .repeating)
                                     .foregroundColor(.red)
-                                    
+                                
                             }
                             
                             if wantsToRecordReply{
@@ -138,9 +138,9 @@ struct ChatView: View {
                         
                         
                     }
-                    
+                        
                     .frame(width: 50, height: 50)
-                    .padding(.bottom, 20)}
+                        .padding(.bottom, 20)}
                     
                     
                     
@@ -168,21 +168,21 @@ struct ChatView: View {
                                 wantsToRecordReply.toggle()
                                 isRecordingReply.toggle()
                                 sentRecordings.append("1")}) {
-                                HStack(alignment: .center, spacing: 8) {
-                                    // Send Button
-                                    Text("Send")
-                                        .font(
-                                            Font.custom("SF Pro", size: 14)
-                                                .weight(.semibold)
-                                        )
-                                        .foregroundColor(.white)
+                                    HStack(alignment: .center, spacing: 8) {
+                                        // Send Button
+                                        Text("Send")
+                                            .font(
+                                                Font.custom("SF Pro", size: 14)
+                                                    .weight(.semibold)
+                                            )
+                                            .foregroundColor(.white)
+                                    }
+                                    .padding(12)
+                                    .frame(maxWidth: .infinity, minHeight: 48, maxHeight: 48, alignment: .center)
+                                    .background(Color(red: 0.92, green: 0.29, blue: 0.35))
+                                    .cornerRadius(12)
                                 }
-                                .padding(12)
-                                .frame(maxWidth: .infinity, minHeight: 48, maxHeight: 48, alignment: .center)
-                                .background(Color(red: 0.92, green: 0.29, blue: 0.35))
-                                .cornerRadius(12)
-                            }
-
+                            
                         }
                         .padding(0)
                         .frame(maxWidth: .infinity, minHeight: 48, maxHeight: 48, alignment: .topLeading)
@@ -248,7 +248,7 @@ struct ChatView: View {
                             .cornerRadius(12)
                         }
                     }
-
+                    
                 }
                 .padding(24)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -303,11 +303,11 @@ struct ChatView: View {
                 )
             )
         }
-
-    
+        
+        
     }
-
-
+    
+    
 }
 
 struct ChatView_Previews: PreviewProvider {
