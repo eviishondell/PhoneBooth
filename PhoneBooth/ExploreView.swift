@@ -13,6 +13,7 @@ let trasncriptImage = Image("Transcripts")
 
 
 struct ExploreView: View {
+    @Environment(\.presentationMode) var presentationMode // Access presentationMode for navigation
     @State private var selectedColor: Color = Color(red : 0.4117647058823529, green:0.3411764705882353, blue: 0.7137254901960784)//.red // Default selected color
     
 
@@ -30,20 +31,24 @@ struct ExploreView: View {
                 // Navigation Bar
                 HStack {
                     Button(action: {
-                        // Back button action
+                        presentationMode.wrappedValue.dismiss() // Navigate back to the previous view
                     }) {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.red)
                             .font(.system(size: 18))
                     }
+                    .frame(width: 50, alignment: .leading)
                     Spacer()
                     Text("Explore")
                         .font(.headline)
                         .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .center)
                     Spacer()
                     Spacer() // Placeholder to center the title
+                        .frame(width: 50)
                 }
                 .padding()
+                .navigationBarBackButtonHidden(true)
                 
                 Spacer()
                 
@@ -183,99 +188,18 @@ struct ExploreView: View {
                     Button(action: {
                         // View Profile  action
                     }) {
-                        HStack {
-                            
-                            Text("View Profile")
-                                .fontWeight(.bold)
-                        }
-                        //.containerRelativeFrame(.horizontal, count:1)
-                        .scrollTransition{content, phase in
-                                          content
-                                .scaleEffect(x :1,
-                                             y : phase.isIdentity
-                                             ?
-                                             1
-                                             :
-                                                0.9
-                                )
-                                          
-                                            }
-                    }}
-
-                .scrollTargetLayout()
-            }
-            .scrollTargetBehavior(.viewAligned)
-            .safeAreaPadding(.horizontal, 40)
-            .padding(.bottom, 40)
-
-            Spacer()
-
-            // View Profile and Reply Buttons
-            HStack {
-
-                HStack {
-                    NavigationLink(destination: ProfileView()) {
-                        Text("View Profile")
-                            .fontWeight(.bold)
+                        NavigationLink(destination: ProfileView()) {
+                            HStack {
+                                Text("View Profile")
+                                    .fontWeight(.bold)
+                            }
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background(Color.pink.opacity(0.2))
                             .foregroundColor(.red)
                             .cornerRadius(10)
-                    }
-                
+                        }
 
-                Button(action: {
-                    // Confirm action for the selected color
-                }) {
-                    HStack {
-                        
-                        Text("Reply")
-                            .fontWeight(.bold)
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                }
-            }
-            .padding(.horizontal, 20)
-
-            //sSpacer()
-            Divider()
-            TabView {
-                HStack(alignment: .center, spacing: 16) {
-                    NavigationLink(destination: ChatsView()){
-                        Image("ExploreTab")
-                            .tabItem {
-                                
-                            }
-                            .tag(0)
-                    }
-                    NavigationLink(destination: ChatsView()){
-                        Image("Chats")
-                            .tabItem {
-                                
-                            }
-                            .tag(1)
-                    }
-                    
-                    NavigationLink(destination: ChatsView()){
-                        Image("Profile")
-                            .tabItem {
-                                
-                            }
-                            .tag(2)
-                    }
-                }
-                .padding(.top, 23)
-            
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.pink.opacity(0.2))
-                        .foregroundColor(.red)
-                        .cornerRadius(10)
                     }
                     
                     Button(action: {
@@ -339,14 +263,13 @@ struct ExploreView: View {
                 .ignoresSafeArea()
                 
                 
-
             }
-        }
+        } .navigationBarHidden(true)
     
     }
 
 
-
+}
 
 struct ExploreView_Previews: PreviewProvider {
     static var previews: some View {

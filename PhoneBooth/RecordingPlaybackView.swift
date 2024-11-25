@@ -8,18 +8,19 @@ import SwiftUI
 
 struct RecordingPlaybackView: View {
     @Environment(\.presentationMode) var presentationMode // Access presentationMode
-
-    var recordingDuration: String = "01:29" // Example duration
+    @State private var navigateToIntroduceYourself = false // State to trigger navigation
     @State private var navigateToColorSelection = false // State to trigger navigation
 
+    var recordingDuration: String = "01:29" // Example duration
+
     var body: some View {
+        NavigationView {
             VStack {
                 // Navigation Bar
                 HStack {
                     Button(action: {
-                        // Back button action (optional)
+                        // Back button action
                         presentationMode.wrappedValue.dismiss() // Go back to the previous view
-
                     }) {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.red)
@@ -72,8 +73,9 @@ struct RecordingPlaybackView: View {
 
                 // Action Buttons
                 HStack {
+                    // Re-record Button
                     Button(action: {
-                        // Re-record action
+                        navigateToIntroduceYourself = true // Navigate back to IntroduceYourselfView
                     }) {
                         HStack {
                             Image(systemName: "mic.fill")
@@ -87,6 +89,7 @@ struct RecordingPlaybackView: View {
                         .cornerRadius(10)
                     }
 
+                    // Confirm Button
                     Button(action: {
                         // Navigate to Color Selection View
                         navigateToColorSelection = true
@@ -107,7 +110,15 @@ struct RecordingPlaybackView: View {
 
                 Spacer()
 
-                // Navigation Link to Color Selection View
+                // Navigation Links
+                NavigationLink(
+                    destination: IntroduceYourselfView(),
+                    isActive: $navigateToIntroduceYourself
+                ) {
+                    EmptyView()
+                }
+                .hidden()
+
                 NavigationLink(
                     destination: ColorSelectionView(),
                     isActive: $navigateToColorSelection
@@ -124,6 +135,8 @@ struct RecordingPlaybackView: View {
                     endPoint: .bottom
                 )
             )
+        }
+        .navigationBarHidden(true)
     }
 }
 

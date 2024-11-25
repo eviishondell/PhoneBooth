@@ -4,81 +4,175 @@
 //
 //  Created by Evolone Layne on 11/22/24.
 //
-
 import SwiftUI
 
 struct ProfileView: View {
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                // Profile Header
-                HStack {
-                    Image("ProfilePicture") // Replace with your profile image name
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                    
-                    VStack(alignment: .leading) {
-                        Text("Laurene")
-                            .font(.title)
-                            .fontWeight(.bold)
-                        
-                        Text("Female, 50 y.o.")
-                            .foregroundColor(.gray)
-                    }
-                    Spacer()
-                }
-                .padding()
+    @Environment(\.presentationMode) var presentationMode // Access presentationMode for navigation
+    @State private var selectedTab: Int = 2 // Default tab to "Profile"
 
-                // Introduction Section
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Introduction")
-                        .font(.headline)
+    var body: some View {
+        VStack {
+            // Header
+            HStack {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss() // Navigate back to the previous view
+                }) {
+                    Image(systemName: "chevron.left")
                         .foregroundColor(.red)
-                    
-                    Text("Hi there! I’m Laurene. When I’m not reading or writing, you’ll find me exploring new cuisines and traveling to discover hidden gems.")
-                        .font(.body)
+                        .font(.system(size: 18))
+                }
+                .frame(width: 50, alignment: .leading)
+                Spacer()
+                VStack(spacing: 4) {
+                    Text("Laurene")
+                        .padding()
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                    Text("Female, 50 y.o.")
+                        .font(.subheadline)
                         .foregroundColor(.gray)
                 }
-                .padding(.horizontal)
+                Spacer()
+            }
+            .padding()
+            .navigationBarBackButtonHidden(true)
 
-                // Other Sections (Travel, Food, Hobbies)
-                ForEach(["Travel", "Food", "Hobbies"], id: \.self) { section in
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(section)
-                            .font(.headline)
-                            .foregroundColor(.white)
-                        
-                        Text("Lorem ipsum content for \(section.lowercased()). Add more details or adjust the layout as needed.")
-                            .font(.body)
-                            .foregroundColor(.white.opacity(0.9))
-                    }
-                    .padding()
+            ScrollView {
+                VStack(spacing: 20) {
+                    // Introduction Section
+                    SectionCard(
+                        title: "Introduction",
+                        backgroundColor: Color.white,
+                        audioTime: "02:15",
+                        description: "Hi there! I’m Laurene. When I’m not reading or writing, you’ll find me exploring new cuisines and traveling to discover hidden gems."
+                    )
+
+                    // Travel Section
+                    SectionCard(
+                        title: "Travel",
+                        backgroundColor: Color.green.opacity(0.2),
+                        audioTime: "01:09",
+                        description: "I love exploring new places and learning about different cultures."
+                    )
+
+                    // Food Section
+                    SectionCard(
+                        title: "Food",
+                        backgroundColor: Color.orange.opacity(0.2),
+                        audioTime: "03:12",
+                        description: "Cooking and trying out new cuisines is my passion."
+                    )
+
+                    // Hobbies Section
+                    SectionCard(
+                        title: "Hobbies",
+                        backgroundColor: Color.purple.opacity(0.2),
+                        audioTime: "03:12",
+                        description: "Reading, writing, and gardening are my favorite hobbies."
+                    )
+                }
+                .padding(.horizontal)
+            }
+
+            // Footer Button with NavigationLink
+            NavigationLink(destination: ChatView()) {
+                Text("Start conversation")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .background(sectionBackgroundColor(section))
-                    .cornerRadius(10)
+                    .padding()
+                    .background(Color.red)
+                    .cornerRadius(12)
                     .padding(.horizontal)
+            }
+            .padding(.vertical, 10)
+
+            // Tab Bar with Highlighted "Profile" Tab
+            Divider()
+            HStack(alignment: .center, spacing: 16) {
+                // Explore Tab
+                NavigationLink(destination: ExploreView()) {
+                    Image("ExploreTab")
+                        .renderingMode(.template)
+                        .foregroundColor(selectedTab == 0 ? .red : .gray)
+                }
+                .simultaneousGesture(TapGesture().onEnded {
+                    selectedTab = 0
+                })
+
+                // Chats Tab
+                NavigationLink(destination: ChatListView()) {
+                    Image("Chats")
+                        .renderingMode(.template)
+                        .foregroundColor(selectedTab == 1 ? .red : .gray)
+                }
+                .simultaneousGesture(TapGesture().onEnded {
+                    selectedTab = 1
+                })
+
+                // Profile Tab
+                Button(action: {
+                    selectedTab = 2 // Ensure "Profile" stays selected
+                }) {
+                    Image("Profile")
+                        .renderingMode(.template)
+                        .foregroundColor(selectedTab == 2 ? .red : .gray)
                 }
             }
-            .padding(.bottom, 50)
+            .padding(.top, 12)
+            .frame(width: 390.0, height: 99.0)
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [Color(white: 1.0), Color(white: 0.95)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+            .ignoresSafeArea()
         }
-        .navigationTitle("Profile")
-        .navigationBarTitleDisplayMode(.inline)
+        .background(Color(UIColor.systemGray6).edgesIgnoringSafeArea(.all))
+        .navigationBarHidden(true)
+        .onAppear {
+            selectedTab = 2 // Highlight the "Profile" tab when this view appears
+        }
     }
-    
-    // Helper function to provide different background colors
-    func sectionBackgroundColor(_ section: String) -> Color {
-        switch section {
-        case "Travel":
-            return Color.green
-        case "Food":
-            return Color.orange
-        case "Hobbies":
-            return Color.purple
-        default:
-            return Color.gray
+}
+
+struct SectionCard: View {
+    let title: String
+    let backgroundColor: Color
+    let audioTime: String
+    let description: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.red)
+
+            HStack {
+                Text(audioTime)
+                    .font(.subheadline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.gray)
+
+                Spacer()
+
+                Image(systemName: "play.circle.fill")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.gray)
+            }
+
+            Text(description)
+                .font(.body)
+                .foregroundColor(.gray)
         }
+        .padding()
+        .background(backgroundColor)
+        .cornerRadius(12)
     }
 }
 
