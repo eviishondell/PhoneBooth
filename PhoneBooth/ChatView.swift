@@ -51,7 +51,9 @@ struct ChatView: View {
                     }
                 }
                 .padding()
+                .frame(width: 400.0)
             }
+            .frame(width: 577.622)
             .background(
                 LinearGradient(
                     stops: [
