@@ -40,10 +40,10 @@ struct ChatListView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 16) {
                     NavigationLink(destination: ChatView()) {
-                        Image("Chat List-1")
+                        Image("Chat List")
                     }
                     Button(action: {}) {
-                        Image("Chat List")
+                        Image("Chat List-1")
                     }
                     Button(action: {}) {
                         Image("Chat List-2")
