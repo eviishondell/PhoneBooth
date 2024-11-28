@@ -7,23 +7,35 @@
 
 import SwiftUI
 
-
 // SwiftUI
 let trasncriptImage = Image("Transcripts")
-
 
 struct ExploreView: View {
     @Environment(\.presentationMode) var presentationMode // Access presentationMode for navigation
     @State private var selectedColor: Color = Color(red : 0.4117647058823529, green:0.3411764705882353, blue: 0.7137254901960784)//.red // Default selected color
     
-
+    let loadedNewSound = false;
+    @State private var isPlayingSound : Bool = false
     
     let promptCards = [1, 2, 3, 4, 5, 6] // Array to generate 6 prompt cards
     
 //    let colors = ["#4069AB", "#3CA05B", "#D3723D", "#F27BAB", "#6957B6", "#C45353"] //Array of Colors
     let colors = ["ipod-Blue", "ipod-Green", "ipod-Orange", "ipod-Pink", "ipod-Purple", "ipod-Red"] //Array of Colors
     
-    let names = ["Jason", "Laurene", "David", "Ares", "Zeus", "Zagreus"]
+    let names = ["Nyx", "Persephone", "Zagreus", "Hercules", "Athena", "Zeus"]
+    
+    //Please fold the below array
+    let transcriptsText = ["The earliest childhood memory I have is ...",
+                           "My favourite childhood dish is ...",
+                           "Ride or Die, thats my motto ...",
+                           "What's a moment you were proud of? ...",
+                           "My first grade teacher was extremely memorable...",
+                           "My first job ever was ..."
+    ]
+    
+    let audioFiles = ["Childhood Memory", "Favourite Childhood Food", "Life_s Motto", "Something you are proud of", "Teacher or mentor", "Work"]
+
+    @State private var activeCardIndex: Int? = 1 // Track the active card index
 
     var body: some View {
         NavigationView {
@@ -61,8 +73,23 @@ struct ExploreView: View {
                             VStack {
                                 //Inner Contents
                                 VStack{
-                                    Image("Transcripts")
-                                        .padding(.bottom, 30)
+                                    //Transcripts
+                                    VStack(alignment: .trailing) {
+                                        Text(transcriptsText[index])
+                                        .font(
+                                        Font.custom("SF Pro", size: 24)
+                                        .weight(.semibold)
+                                        )
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(.white.opacity(0.6))
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                                    }
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 8)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+                                    .background(.white.opacity(0.12))
+                                    .cornerRadius(20)
+
                                     
                                     //Information Playback Controls
                                     VStack {
@@ -98,46 +125,14 @@ struct ExploreView: View {
                                         }
                                         .padding(.bottom, 20)
                                         
-                                        Image("Audio Progress Bar")
-                                            .foregroundColor(.white)
-                                        
-                                        
-                                        // Playback Controls
-                                        HStack {
-                                            Button(action:{})
-                                            {
-                                                Image(systemName: "gobackward.15")
-                                                    .resizable()
-                                                    .frame(width : 38, height: 38, alignment: .center)
-                                                    .foregroundColor(.white)
+                                        AudioPlayer(expandSheet: .constant(true), audioString: audioFiles[index], type: ".m4a")
+                                            .padding(.horizontal, 8)
+                                            .onAppear {
+                                                print(audioFiles[index])
                                             }
-                                            
-                                            Spacer()
-                                            
-                                            Button(action:{})
-                                            {
-                                                Image(systemName: "pause.fill")
-                                                    .resizable()
-                                                    .frame(width: 38, height: 44)
-                                                    .foregroundColor(.white)
-                                            }
-                                            
-                                            Spacer()
-                                            
-                                            Button(action:{})
-                                            {
-                                                Image(systemName: "goforward.15")
-                                                    .resizable()
-                                                    .frame(width : 38, height: 38, alignment: .center)
-                                                    .foregroundColor(.white)
-                                            }
-                                        }
-                                        .padding()
-                                        //.background(selectedColor)
-                                        .cornerRadius(12)
-                                        .padding(.horizontal, 20)
-                                        
+                                    
                                     }
+                                    
                                 }// Card V Stack
                                 .padding(.horizontal, 24)
                                 .padding(.vertical, 32)
@@ -173,7 +168,8 @@ struct ExploreView: View {
                                     )
                                 
                             }
-                        }}
+                        }
+                    }
                     
                     .scrollTargetLayout()
                 }

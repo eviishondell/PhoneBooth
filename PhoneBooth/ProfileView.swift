@@ -145,34 +145,84 @@ struct SectionCard: View {
     let backgroundColor: Color
     let audioTime: String
     let description: String
-
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(title)
-                .font(.headline)
-                .foregroundColor(.red)
-
-            HStack {
-                Text(audioTime)
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .foregroundColor(.gray)
-
+        //        VStack(alignment: .leading, spacing: 10) {
+        //            Text(title)
+        //                .font(.headline)
+        //                .foregroundColor(.red)
+        //
+        //            HStack {
+        //                Text(audioTime)
+        //                    .font(.subheadline)
+        //                    .fontWeight(.bold)
+        //                    .foregroundColor(.gray)
+        //
+        //                Spacer()
+        //
+        //                Image(systemName: "play.circle.fill")
+        //                    .resizable()
+        //                    .frame(width: 40, height: 40)
+        //                    .foregroundColor(.gray)
+        //            }
+        //
+        //            Text(description)
+        //                .font(.body)
+        //                .foregroundColor(.gray)
+        //        }
+        //        .padding()
+        //        .background(backgroundColor)
+        //        .cornerRadius(12)
+        //    }
+        
+        VStack(alignment: .leading, spacing: 16) {
+            HStack(alignment: .center) {
+                // Space Between
+                Text("Introduction")
+                    .font(
+                        Font.custom("SF Pro", size: 20)
+                            .weight(.semibold)
+                    )
+                    .foregroundColor(Color(red: 0.92, green: 0.29, blue: 0.35))
+                
                 Spacer()
+                // Alternative Views and Spacers
+                Image(systemName: "pencil")
+                HStack(alignment: .center, spacing: 12) {
+                    HStack(alignment: .center, spacing: 4) {
+                        Text("02:15")
+                        .font(
+                        Font.custom("SF Pro", size: 12)
+                        .weight(.medium)
+                        )
+                        .foregroundColor(Color(red: 0.53, green: 0.49, blue: 0.46))
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 0)
+                    .frame(height: 26, alignment: .center)
+                    .background(Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.2))
+                    .cornerRadius(15)
 
-                Image(systemName: "play.circle.fill")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.gray)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .background(Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.1))
+                .cornerRadius(20)
+
             }
-
-            Text(description)
-                .font(.body)
-                .foregroundColor(.gray)
+            .padding(.leading, 0)
+            .padding(.trailing, 9)
+            .padding(.vertical, 0)
+            .frame(width: 302, alignment: .center)
+            
+            
         }
-        .padding()
-        .background(backgroundColor)
-        .cornerRadius(12)
+        .padding(20)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .background(.white)
+        .cornerRadius(25)
+        
     }
 }
 
