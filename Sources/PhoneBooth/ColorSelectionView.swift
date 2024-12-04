@@ -8,15 +8,14 @@ import SwiftUI
 
 struct ColorSelectionView: View {
     @Environment(\.presentationMode) var presentationMode // Access presentationMode
-
     @State private var selectedColor: Color = .purple // Default selected color
     @State private var navigateToAllSet = false // State to navigate to the final screen
+
     var body: some View {
         VStack {
             // Navigation Bar
             HStack {
                 Button(action: {
-                    // Back button action
                     presentationMode.wrappedValue.dismiss() // Go back to the previous view
                 }) {
                     Image(systemName: "chevron.left")
@@ -30,14 +29,13 @@ struct ColorSelectionView: View {
                 Spacer()
             }
             .padding()
+            .modifier(ConditionalNavigationBarBackButtonHidden()) // Apply compatibility modifier
 
             Spacer()
 
             // Color Picker
-            ScrollView(.horizontal, showsIndicators: false) { // Enable horizontal scrolling
-
             HStack(spacing: 16) {
-                ForEach([Color.red, Color.pink, Color.orange, Color.yellow, Color.green, Color.teal, Color.blue, Color.purple], id: \.self) { color in
+                ForEach(getAvailableColors(), id: \.self) { color in
                     ZStack {
                         Circle()
                             .fill(color)
@@ -53,8 +51,6 @@ struct ColorSelectionView: View {
                         }
                     }
                 }
-            }
-                .padding(.horizontal)
             }
             .padding(.bottom, 20)
 
@@ -148,8 +144,7 @@ struct ColorSelectionView: View {
                 }
 
                 Button(action: {
-                    // Confirm action for the selected color
-                    navigateToAllSet = true
+                    navigateToAllSet = true // Confirm action for the selected color
                 }) {
                     HStack {
                         Image(systemName: "checkmark")
@@ -166,6 +161,7 @@ struct ColorSelectionView: View {
             .padding(.horizontal, 20)
 
             Spacer()
+
             // Navigation Link to Final Screen
             NavigationLink(
                 destination: AllSetView(),
@@ -175,7 +171,6 @@ struct ColorSelectionView: View {
             }
             .hidden()
         }
-        .navigationBarBackButtonHidden(true)
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [Color(white: 1.0), Color(white: 0.95)]),
@@ -183,7 +178,25 @@ struct ColorSelectionView: View {
                 endPoint: .bottom
             )
         )
-//        .ignoresSafeArea()
+    }
+
+    // Get available colors while handling macOS version compatibility
+    private func getAvailableColors() -> [Color] {
+        if #available(macOS 12.0, *) {
+            return [Color.red, Color.pink, Color.orange, Color.yellow, Color.green, Color.teal, Color.blue, Color.purple]
+        } else {
+            return [Color.red, Color.pink, Color.orange, Color.yellow, Color.green, Color.blue, Color.purple]
+        }
+    }
+}
+
+struct ConditionalNavigationBarBackButtonHidden: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(macOS 13.0, iOS 16.0, *) {
+            content.navigationBarBackButtonHidden(true)
+        } else {
+            content
+        }
     }
 }
 
@@ -192,3 +205,4 @@ struct ColorSelectionView_Previews: PreviewProvider {
         ColorSelectionView()
     }
 }
+

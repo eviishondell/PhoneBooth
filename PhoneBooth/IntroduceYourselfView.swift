@@ -37,8 +37,11 @@ struct IntroduceYourselfView: View {
                 Text("What do you want people to know about you?")
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .foregroundColor(isRecording ? .red : .black) // Change color when recording
+                    .foregroundColor(.black)
                     .multilineTextAlignment(.center)
+                    .lineLimit(2) // Limit text to 2 lines
+                    .frame(maxWidth: .infinity) // Ensure it uses the available width
+                    .padding(.horizontal, 20) // Add padding for consistent margins
                     .padding(.bottom, 10)
 
                 // Supporting Questions
