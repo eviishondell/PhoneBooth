@@ -120,7 +120,7 @@ struct RecordingPlaybackView: View {
                 .hidden()
 
                 NavigationLink(
-                    destination: ColorSelectionView(),
+                    destination: NewFlowView(),
                     isActive: $navigateToColorSelection
                 ) {
                     EmptyView()
