@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct ChatView: View {
+    @Environment(\.presentationMode) var presentationMode // Access presentation mode
     @State private var selectedColor: Color = Color(red : 0.4117647058823529, green:0.3411764705882353, blue: 0.7137254901960784)//.red // Default selected color
     
     @State private var isVoiceChatPlayed: Bool = false // Tracks whether the button has been pressed
@@ -28,6 +29,7 @@ struct ChatView: View {
                 HStack {
                     Button(action: {
                         // Back button action
+                        presentationMode.wrappedValue.dismiss() // Dismiss the current view
                     }) {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.red)
@@ -75,23 +77,10 @@ struct ChatView: View {
                             }
                         }
                         
-                        
-                        //}
-                        //                        .padding(0)
-                        //                        .frame(width: 390, height: 844, alignment: .top)
-                        //                        .background(
-                        //                        LinearGradient(
-                        //                        stops: [
-                        //                        Gradient.Stop(color: Color(red: 0.94, green: 0.92, blue: 0.91), location: 0.00),
-                        //                        Gradient.Stop(color: Color(red: 0.96, green: 0.89, blue: 0.84), location: 1.00),
-                        //                        ],
-                        //                        startPoint: UnitPoint(x: 0.5, y: 0),
-                        //                        endPoint: UnitPoint(x: 0.5, y: 1)
-                        //                        )
-                        //                        )
                     }
                     .padding(0)
                     .frame(width: 390, height: 844, alignment: .top)
+                   
                     .background(
                         LinearGradient(
                             stops: [
@@ -303,7 +292,7 @@ struct ChatView: View {
                 )
             )
         }
-        
+        .navigationBarBackButtonHidden(true)
         
     }
     

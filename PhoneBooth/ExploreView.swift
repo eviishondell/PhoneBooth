@@ -201,16 +201,18 @@ struct ExploreView: View {
                     Button(action: {
                         // Confirm action for the selected color
                     }) {
-                        HStack {
-                            
-                            Text("Reply")
-                                .fontWeight(.bold)
+                        NavigationLink(destination: ChatView()) {
+                            HStack {
+                                
+                                Text("Reply")
+                                    .fontWeight(.bold)
+                            }
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
                         }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
                     }
                 }
                 .padding(.horizontal, 20)

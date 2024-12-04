@@ -132,20 +132,6 @@ struct ColorSelectionView: View {
 
             // Bottom Buttons
             HStack(spacing: 20) {
-                Button(action: {
-                    // Re-record action
-                }) {
-                    HStack {
-                        Image(systemName: "mic.fill")
-                        Text("Re-record")
-                            .fontWeight(.bold)
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.pink.opacity(0.2))
-                    .foregroundColor(.red)
-                    .cornerRadius(10)
-                }
 
                 Button(action: {
                     // Confirm action for the selected color
