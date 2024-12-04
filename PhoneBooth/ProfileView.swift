@@ -22,24 +22,28 @@ struct ProfileView: View {
                         .font(.system(size: 18))
                 }
                 .frame(width: 50, alignment: .leading)
-                Spacer()
-                VStack(spacing: 4) {
+//                Spacer()
+                VStack {
                     Text("Laurene")
-                        .padding()
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
+                    
                     Text("Female, 50 y.o.")
                         .font(.subheadline)
                         .foregroundColor(.gray)
+                        .padding(.top, 5)
+
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 75)
                 Spacer()
             }
             .padding()
             .navigationBarBackButtonHidden(true)
-
+            
             ScrollView {
-                VStack(spacing: 20) {
+                VStack() {
                     // Introduction Section
                     SectionCard(
                         title: "Introduction",
@@ -48,7 +52,7 @@ struct ProfileView: View {
                         description: "Hi there! I’m Laurene. When I’m not reading or writing, you’ll find me exploring new cuisines and traveling to discover hidden gems.",
                         isWhite: true
                     )
-
+                    
                     // Travel Section
                     SectionCard(
                         title: "Travel",
@@ -57,7 +61,7 @@ struct ProfileView: View {
                         description: "I love exploring new places and learning about different cultures.",
                         isWhite: false
                     )
-
+                    
                     // Food Section
                     SectionCard(
                         title: "Food",
@@ -66,7 +70,7 @@ struct ProfileView: View {
                         description: "Cooking and trying out new cuisines is my passion.",
                         isWhite: false
                     )
-
+                    
                     // Hobbies Section
                     SectionCard(
                         title: "Hobbies",
@@ -78,7 +82,7 @@ struct ProfileView: View {
                 }
                 .padding(.horizontal)
             }
-
+            
             // Footer Button with NavigationLink
             NavigationLink(destination: ChatView()) {
                 Text("Start conversation")
@@ -92,15 +96,23 @@ struct ProfileView: View {
                     .padding(.horizontal)
             }
             .padding(.vertical, 10)
-
-            // Tab Bar with Highlighted "Profile" Tab
+            
+//            Spacer()
             Divider()
-            HStack(alignment: .center, spacing: 16) {
+            HStack(alignment: .center, spacing: 90) { // Increase spacing between icons
                 // Explore Tab
                 NavigationLink(destination: ExploreView()) {
-                    Image("ExploreTab")
-                        .renderingMode(.template)
-                        .foregroundColor(selectedTab == 0 ? .red : .gray)
+                    VStack {
+                        Image(systemName: "globe") // SF Symbol for "Explore"
+                            .resizable() // Make the icon resizable
+                            .scaledToFit() // Maintain aspect ratio
+                            .frame(width: 35, height: 35) // Make the icon bigger
+                            .foregroundColor(selectedTab == 0 ? .red : .gray)
+
+                        Text("Explore") // Text under the icon
+                            .font(.caption)
+                            .foregroundColor(selectedTab == 0 ? .red : .gray)
+                    }
                 }
                 .simultaneousGesture(TapGesture().onEnded {
                     selectedTab = 0
@@ -108,34 +120,62 @@ struct ProfileView: View {
 
                 // Chats Tab
                 NavigationLink(destination: ChatListView()) {
-                    Image("Chats")
-                        .renderingMode(.template)
-                        .foregroundColor(selectedTab == 1 ? .red : .gray)
+                    VStack {
+                        Image(systemName: "message.fill") // SF Symbol for "Chats"
+                            .resizable() // Make the icon resizable
+                            .scaledToFit() // Maintain aspect ratio
+                            .frame(width: 35, height: 35) // Make the icon bigger
+                            .foregroundColor(selectedTab == 1 ? .red : .gray)
+
+                        Text("Chats") // Text under the icon
+                            .font(.caption)
+                            .foregroundColor(selectedTab == 1 ? .red : .gray)
+                    }
+                    
                 }
                 .simultaneousGesture(TapGesture().onEnded {
                     selectedTab = 1
                 })
-
+                
                 // Profile Tab
                 Button(action: {
                     selectedTab = 2 // Ensure "Profile" stays selected
                 }) {
-                    Image("Profile")
-                        .renderingMode(.template)
-                        .foregroundColor(selectedTab == 2 ? .red : .gray)
+                    VStack {
+                        Image(systemName: "person.fill") // SF Symbol for "Profile"
+                            .resizable() // Make the icon resizable
+                            .scaledToFit() // Maintain aspect ratio
+                            .frame(width: 35, height: 35) // Make the icon bigger
+                            .foregroundColor(selectedTab == 2 ? .red : .gray)
+
+                        Text("Profile") // Text under the icon
+                            .font(.caption)
+                            .foregroundColor(selectedTab == 2 ? .red : .gray)
+                    }
                 }
             }
             .padding(.top, 12)
-            .frame(width: 390.0, height: 99.0)
+            .frame(height: 55.0)
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color(white: 1.0), Color(white: 0.95)]),
+                    gradient: Gradient(colors: [Color.clear, Color.clear]), // Transparent background
                     startPoint: .top,
                     endPoint: .bottom
                 )
             )
             .ignoresSafeArea()
+
         }
+        .background(
+            LinearGradient(
+                stops: [
+                    Gradient.Stop(color: Color(red: 0.94, green: 0.92, blue: 0.91), location: 0.00),
+                    Gradient.Stop(color: Color(red: 0.96, green: 0.89, blue: 0.84), location: 1.00),
+                ],
+                startPoint: UnitPoint(x: 0.5, y: 0),
+                endPoint: UnitPoint(x: 0.5, y: 1)
+            )
+        )
         .background(Color(UIColor.systemGray6).edgesIgnoringSafeArea(.all))
         .navigationBarHidden(true)
         .onAppear {
@@ -152,34 +192,6 @@ struct SectionCard: View {
     let isWhite: Bool
     
     var body: some View {
-        //        VStack(alignment: .leading, spacing: 10) {
-        //            Text(title)
-        //                .font(.headline)
-        //                .foregroundColor(.red)
-        //
-        //            HStack {
-        //                Text(audioTime)
-        //                    .font(.subheadline)
-        //                    .fontWeight(.bold)
-        //                    .foregroundColor(.gray)
-        //
-        //                Spacer()
-        //
-        //                Image(systemName: "play.circle.fill")
-        //                    .resizable()
-        //                    .frame(width: 40, height: 40)
-        //                    .foregroundColor(.gray)
-        //            }
-        //
-        //            Text(description)
-        //                .font(.body)
-        //                .foregroundColor(.gray)
-        //        }
-        //        .padding()
-        //        .background(backgroundColor)
-        //        .cornerRadius(12)
-        //    }
-        
         VStack(alignment: .leading, spacing: 16) {
             HStack(alignment: .center) {
                 // Space Between
@@ -238,6 +250,7 @@ struct SectionCard: View {
             
             
         }
+        
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .topLeading)
         .background(!isWhite ?

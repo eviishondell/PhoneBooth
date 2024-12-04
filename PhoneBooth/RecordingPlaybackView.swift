@@ -42,7 +42,8 @@ struct RecordingPlaybackView: View {
                     .fontWeight(.semibold)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
-                    .padding(.bottom, 10)
+                    .padding(.horizontal, 10)
+                    .padding(.bottom,10)
 
                 // Playback Controls
                 VStack {
@@ -120,7 +121,7 @@ struct RecordingPlaybackView: View {
                 .hidden()
 
                 NavigationLink(
-                    destination: NewFlowView(),
+                    destination: ColorSelectionView(),
                     isActive: $navigateToColorSelection
                 ) {
                     EmptyView()

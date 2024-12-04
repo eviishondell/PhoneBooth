@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct ChatListView: View {
+    
     @Environment(\.presentationMode) var presentationMode // Access presentationMode for navigation
     @State private var selectedTab: Int = 1 // Default tab is "Chats"
 
@@ -33,7 +34,6 @@ struct ChatListView: View {
                 Spacer().frame(width: 44) // Placeholder to balance spacing
             }
             .padding()
-            .background(Color.white) // Optional background for the header
 
             Spacer()
 
@@ -55,51 +55,74 @@ struct ChatListView: View {
 
             Spacer()
 
-            // Footer Tab Bar with active tab styling
             Divider()
-            HStack(alignment: .center, spacing: 16) {
+            
+            HStack(alignment: .center, spacing: 90) { // Increase spacing between icons
                 // Explore Tab
                 NavigationLink(destination: ExploreView()) {
-                    Image("ExploreTab")
-                        .renderingMode(.template)
-                        .foregroundColor(selectedTab == 0 ? .red : .gray)
+                    VStack {
+                        Image(systemName: "globe") // SF Symbol for "Explore"
+                            .resizable() // Make the icon resizable
+                            .scaledToFit() // Maintain aspect ratio
+                            .frame(width: 35, height: 35) // Make the icon bigger
+                            .foregroundColor(selectedTab == 0 ? .red : .gray)
+
+                        Text("Explore") // Text under the icon
+                            .font(.caption)
+                            .foregroundColor(selectedTab == 0 ? .red : .gray)
+                    }
                 }
                 .simultaneousGesture(TapGesture().onEnded {
-                    selectedTab = 0 // Update selected tab
+                    selectedTab = 0
                 })
 
                 // Chats Tab
-                Button(action: {
-                    selectedTab = 1 // Update selected tab
-                }) {
-                    Image("Chats")
-                        .renderingMode(.template)
-                        .foregroundColor(selectedTab == 1 ? .red : .gray)
-                }
+                NavigationLink(destination: ChatListView()) {
+                    VStack {
+                        Image(systemName: "message.fill") // SF Symbol for "Chats"
+                            .resizable() // Make the icon resizable
+                            .scaledToFit() // Maintain aspect ratio
+                            .frame(width: 35, height: 35) // Make the icon bigger
+                            .foregroundColor(selectedTab == 1 ? .red : .gray)
 
-                // Profile Tab
-                NavigationLink(destination: ProfileView()) {
-                    Image("Profile")
-                        .renderingMode(.template)
-                        .foregroundColor(selectedTab == 2 ? .red : .gray)
+                        Text("Chats") // Text under the icon
+                            .font(.caption)
+                            .foregroundColor(selectedTab == 1 ? .red : .gray)
+                    }
                 }
                 .simultaneousGesture(TapGesture().onEnded {
-                    selectedTab = 2 // Update selected tab
+                    selectedTab = 1
                 })
+                
+                // Profile Tab
+                Button(action: {
+                    selectedTab = 2 // Ensure "Profile" stays selected
+                }) {
+                    VStack {
+                        Image(systemName: "person.fill") // SF Symbol for "Profile"
+                            .resizable() // Make the icon resizable
+                            .scaledToFit() // Maintain aspect ratio
+                            .frame(width: 35, height: 35) // Make the icon bigger
+                            .foregroundColor(selectedTab == 2 ? .red : .gray)
+
+                        Text("Profile") // Text under the icon
+                            .font(.caption)
+                            .foregroundColor(selectedTab == 2 ? .red : .gray)
+                    }
+                }
             }
             .padding(.top, 12)
-            .frame(width: 390.0, height: 99.0)
+            .frame(height: 55.0)
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color(white: 1.0), Color(white: 0.95)]),
+                    gradient: Gradient(colors: [Color.clear, Color.clear]), // Transparent background
                     startPoint: .top,
                     endPoint: .bottom
                 )
             )
             .ignoresSafeArea()
+
         }
-        .navigationBarHidden(true) // Hide the system navigation bar
-        .navigationBarBackButtonHidden(true) // Ensure the system back button is removed
         .background(
             LinearGradient(
                 stops: [
@@ -110,6 +133,18 @@ struct ChatListView: View {
                 endPoint: UnitPoint(x: 0.5, y: 1)
             )
         )
+        .navigationBarHidden(true) // Hide the system navigation bar
+        .navigationBarBackButtonHidden(true) // Ensure the system back button is removed
+//        .background(
+//            LinearGradient(
+//                stops: [
+//                    Gradient.Stop(color: Color(red: 0.94, green: 0.92, blue: 0.91), location: 0.00),
+//                    Gradient.Stop(color: Color(red: 0.96, green: 0.89, blue: 0.84), location: 1.00),
+//                ],
+//                startPoint: UnitPoint(x: 0.5, y: 0),
+//                endPoint: UnitPoint(x: 0.5, y: 1)
+//            )
+//        )
         .onAppear {
             selectedTab = 1 // Highlight the "Chats" tab when this view appears
         }
