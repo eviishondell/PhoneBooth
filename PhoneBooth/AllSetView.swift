@@ -55,7 +55,7 @@ struct AllSetView: View {
             .padding(.bottom, 40)
 
             // Start Button with NavigationLink
-            NavigationLink(destination: ExploreView()) {
+            NavigationLink(destination: NewFlowView()) {
                 Text("Start")
                     .font(.headline)
                     .fontWeight(.bold)

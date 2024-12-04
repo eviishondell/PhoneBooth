@@ -35,6 +35,7 @@ struct IntroduceYourselfView: View {
 
                 // Main Prompt Text
                 Text("What do you want people to know about you?")
+                    .multilineTextAlignment(.center)
                     .font(.title3)
                     .fontWeight(.semibold)
                     .foregroundColor(.black)

@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct ChatView: View {
+    @State private var selectedTab: Int = 2
     @Environment(\.presentationMode) var presentationMode // Access presentation mode
     @State private var selectedColor: Color = Color(red : 0.4117647058823529, green:0.3411764705882353, blue: 0.7137254901960784)//.red // Default selected color
     
@@ -81,16 +82,6 @@ struct ChatView: View {
                     .padding(0)
                     .frame(width: 390, height: 844, alignment: .top)
                    
-                    .background(
-                        LinearGradient(
-                            stops: [
-                                Gradient.Stop(color: Color(red: 0.94, green: 0.92, blue: 0.91), location: 0.00),
-                                Gradient.Stop(color: Color(red: 0.96, green: 0.89, blue: 0.84), location: 1.00),
-                            ],
-                            startPoint: UnitPoint(x: 0.5, y: 0),
-                            endPoint: UnitPoint(x: 0.5, y: 1)
-                        )
-                    )
                     
                     .scrollTargetLayout()
                 }
@@ -242,43 +233,74 @@ struct ChatView: View {
                 .padding(24)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 //Spacer()
+//                Spacer()
                 Divider()
-                TabView {
-                    HStack(alignment: .center, spacing: 16) {
-                        Image("ExploreTab")
-                            .tabItem {
-                                
-                            }
-                            .tag(0)
-                        
-                        Button(action :{}){
-                            Image("Chats")
-                                .tabItem {
-                                    
-                                }
-                                .tag(1)
+                
+                HStack(alignment: .center, spacing: 90) { // Increase spacing between icons
+                    // Explore Tab
+                    NavigationLink(destination: ExploreView()) {
+                        VStack {
+                            Image(systemName: "globe") // SF Symbol for "Explore"
+                                .resizable() // Make the icon resizable
+                                .scaledToFit() // Maintain aspect ratio
+                                .frame(width: 35, height: 35) // Make the icon bigger
+                                .foregroundColor(selectedTab == 0 ? .red : .gray)
+
+                            Text("Explore") // Text under the icon
+                                .font(.caption)
+                                .foregroundColor(selectedTab == 0 ? .red : .gray)
                         }
-                        
-                        
-                        Image("Profile")
-                            .tabItem {
-                                
-                            }
-                            .tag(2)
                     }
-                    .padding(.top, 12)
+                    .simultaneousGesture(TapGesture().onEnded {
+                        selectedTab = 0
+                    })
+
+                    // Chats Tab
+                    NavigationLink(destination: ChatListView()) {
+                        VStack {
+                            Image(systemName: "message.fill") // SF Symbol for "Chats"
+                                .resizable() // Make the icon resizable
+                                .scaledToFit() // Maintain aspect ratio
+                                .frame(width: 35, height: 35) // Make the icon bigger
+                                .foregroundColor(selectedTab == 1 ? .red : .gray)
+
+                            Text("Chats") // Text under the icon
+                                .font(.caption)
+                                .foregroundColor(selectedTab == 1 ? .red : .gray)
+                        }
+                    }
+                    .simultaneousGesture(TapGesture().onEnded {
+                        selectedTab = 1
+                    })
                     
+                    // Profile Tab
+                    Button(action: {
+                        selectedTab = 2 // Ensure "Profile" stays selected
+                    }) {
+                        VStack {
+                            Image(systemName: "person.fill") // SF Symbol for "Profile"
+                                .resizable() // Make the icon resizable
+                                .scaledToFit() // Maintain aspect ratio
+                                .frame(width: 35, height: 35) // Make the icon bigger
+                                .foregroundColor(selectedTab == 2 ? .red : .gray)
+
+                            Text("Profile") // Text under the icon
+                                .font(.caption)
+                                .foregroundColor(selectedTab == 2 ? .red : .gray)
+                        }
+                    }
                 }
-                .frame(width: 390.0, height: 99.0)
+                .padding(.top, 12)
+                .frame(height: 55.0)
                 .background(
                     LinearGradient(
-                        gradient: Gradient(colors: [Color(white: 1.0), Color(white: 0.95)]),
+                        gradient: Gradient(colors: [Color.clear, Color.clear]), // Transparent background
                         startPoint: .top,
                         endPoint: .bottom
                     )
                 )
                 .ignoresSafeArea()
-                
+
                 
             }
             .background(

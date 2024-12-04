@@ -17,6 +17,8 @@ struct NewFlowView: View {
     @State private var showPlayback = false // Tracks if playback screen is displayed
     @State private var recordingDuration = "00:00" // Recording duration placeholder
     @State private var navigateToPlayback = false // Tracks navigation state
+    @State private var showText = true // Controls visibility of the text
+    @State private var showPrompt = false // Controls visibility of the prompt
 
     var body: some View {
         VStack {
@@ -39,16 +41,38 @@ struct NewFlowView: View {
 
             Spacer()
 
-            // Prompt Text
-            Text("What makes you feel completely alive?")
-                .font(.title3)
-                .fontWeight(.semibold)
-                .foregroundColor(.black)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 20)
-                .padding(.bottom, 10)
+            // Display the text for 5 seconds and then show the prompt
+            if showText {
+                Text("Welcome, take a moment to reflect.")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 10)
+                    .onAppear {
+                        // Wait for 5 seconds, then hide the text and show the prompt
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            showText = false
+                            showPrompt = true
+                        }
+                    }
+            }
+
+            // Display the prompt after the text disappears
+            if showPrompt {
+                Text("What makes you feel completely alive?")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 10)
+            }
 
             Spacer()
 
@@ -185,3 +209,4 @@ struct NewFlowView_Previews: PreviewProvider {
         NewFlowView()
     }
 }
+
