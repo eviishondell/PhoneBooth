@@ -43,33 +43,37 @@ struct ProfileView: View {
                     // Introduction Section
                     SectionCard(
                         title: "Introduction",
-                        backgroundColor: Color.white,
+                        backgroundColor: "ipod-White",
                         audioTime: "02:15",
-                        description: "Hi there! I’m Laurene. When I’m not reading or writing, you’ll find me exploring new cuisines and traveling to discover hidden gems."
+                        description: "Hi there! I’m Laurene. When I’m not reading or writing, you’ll find me exploring new cuisines and traveling to discover hidden gems.",
+                        isWhite: true
                     )
 
                     // Travel Section
                     SectionCard(
                         title: "Travel",
-                        backgroundColor: Color.green.opacity(0.2),
+                        backgroundColor: "ipod-Green",
                         audioTime: "01:09",
-                        description: "I love exploring new places and learning about different cultures."
+                        description: "I love exploring new places and learning about different cultures.",
+                        isWhite: false
                     )
 
                     // Food Section
                     SectionCard(
                         title: "Food",
-                        backgroundColor: Color.orange.opacity(0.2),
+                        backgroundColor: "ipod-Blue",
                         audioTime: "03:12",
-                        description: "Cooking and trying out new cuisines is my passion."
+                        description: "Cooking and trying out new cuisines is my passion.",
+                        isWhite: false
                     )
 
                     // Hobbies Section
                     SectionCard(
                         title: "Hobbies",
-                        backgroundColor: Color.purple.opacity(0.2),
+                        backgroundColor: "ipod-Purple",
                         audioTime: "03:12",
-                        description: "Reading, writing, and gardening are my favorite hobbies."
+                        description: "Reading, writing, and gardening are my favorite hobbies.",
+                        isWhite: false
                     )
                 }
                 .padding(.horizontal)
@@ -142,9 +146,10 @@ struct ProfileView: View {
 
 struct SectionCard: View {
     let title: String
-    let backgroundColor: Color
+    let backgroundColor: String
     let audioTime: String
     let description: String
+    let isWhite: Bool
     
     var body: some View {
         //        VStack(alignment: .leading, spacing: 10) {
@@ -178,49 +183,82 @@ struct SectionCard: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(alignment: .center) {
                 // Space Between
-                Text("Introduction")
+                Text(title)
                     .font(
                         Font.custom("SF Pro", size: 20)
                             .weight(.semibold)
                     )
-                    .foregroundColor(Color(red: 0.92, green: 0.29, blue: 0.35))
+                    .foregroundColor(isWhite ? Color(red: 0.92, green: 0.29, blue: 0.35) : Color.white)
                 
                 Spacer()
                 // Alternative Views and Spacers
                 Image(systemName: "pencil")
-                HStack(alignment: .center, spacing: 12) {
-                    HStack(alignment: .center, spacing: 4) {
-                        Text("02:15")
-                        .font(
-                        Font.custom("SF Pro", size: 12)
-                        .weight(.medium)
-                        )
-                        .foregroundColor(Color(red: 0.53, green: 0.49, blue: 0.46))
-                    }
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 0)
-                    .frame(height: 26, alignment: .center)
-                    .background(Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.2))
-                    .cornerRadius(15)
-
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .background(Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.1))
-                .cornerRadius(20)
+                    .foregroundColor(isWhite ? .black : .white)
 
             }
             .padding(.leading, 0)
             .padding(.trailing, 9)
             .padding(.vertical, 0)
             .frame(width: 302, alignment: .center)
+            HStack(alignment: .center, spacing: 12) {
+                HStack(alignment: .center, spacing: 4) {
+                    Text("02:15")
+                    .font(
+                    Font.custom("SF Pro", size: 12)
+                    .weight(.medium)
+                    )
+                    .foregroundColor(isWhite ? Color(red: 0.53, green: 0.49, blue: 0.46) : Color(.white))
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 0)
+                .frame(height: 26, alignment: .center)
+                .background(isWhite ? Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.2) : Color(.white.opacity(0.2)))
+                .cornerRadius(15)
+                
+                Image(isWhite ? "WaveChart" : "LightWaveChart")
+                    //.renderingMode(.template)
+                
+                Button(action:{}){
+                    HStack(alignment: .center, spacing: 0) {
+                        Image(systemName: "play.fill")
+                            .foregroundColor(isWhite ? Color(red: 0.53, green: 0.49, blue: 0.46) : Color(.white))
+                    }
+                    .padding(0)
+                    .frame(width: 34, height: 34, alignment: .center)
+                    .background(isWhite ? Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.2) : Color(.white.opacity(0.2)))
+                    .cornerRadius(100)
+                }
+
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .background(isWhite ? Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.1) : Color(.white.opacity(0.1)))
+            .cornerRadius(20)
             
             
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .background(.white)
+        .background(!isWhite ?
+        LinearGradient(
+        stops: [
+        Gradient.Stop(color: .black.opacity(0), location: 0.00),
+        Gradient.Stop(color: .black.opacity(0.16), location: 1.00),
+        ],
+        startPoint: UnitPoint(x: 0, y: 0),
+        endPoint: UnitPoint(x: 1, y: 1)
+        ) :
+                        LinearGradient(
+                        stops: [
+                        Gradient.Stop(color: .black.opacity(0), location: 0.00),
+                        Gradient.Stop(color: .black.opacity(0), location: 0.00),
+                        ],
+                        startPoint: UnitPoint(x: 0, y: 0),
+                        endPoint: UnitPoint(x: 0, y: 0)
+                        )
+        )
+        .background(Color(backgroundColor))
         .cornerRadius(25)
         
     }

@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		96B9771E2D00EA6900D7B801 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B9771D2D00EA6900D7B801 /* AVFoundation.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8D4446F32CEE585700F585CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		8D4446E22CEE585600F585CC /* PhoneBooth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhoneBooth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4446F22CEE585700F585CC /* PhoneBoothTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhoneBoothTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D4446FC2CEE585700F585CC /* PhoneBoothUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhoneBoothUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		96B9771D2D00EA6900D7B801 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96B9771E2D00EA6900D7B801 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +84,7 @@
 				8D4446E42CEE585600F585CC /* PhoneBooth */,
 				8D4446F52CEE585700F585CC /* PhoneBoothTests */,
 				8D4446FF2CEE585700F585CC /* PhoneBoothUITests */,
+				96B9771C2D00EA6900D7B801 /* Frameworks */,
 				8D4446E32CEE585600F585CC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +97,14 @@
 				8D4446FC2CEE585700F585CC /* PhoneBoothUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		96B9771C2D00EA6900D7B801 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96B9771D2D00EA6900D7B801 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -399,6 +414,7 @@
 				DEVELOPMENT_TEAM = HCP83V9NAN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for uploading audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +444,7 @@
 				DEVELOPMENT_TEAM = HCP83V9NAN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need microphone access for uploading audio";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
