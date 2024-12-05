@@ -8,7 +8,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @Environment(\.presentationMode) var presentationMode // Access presentationMode for navigation
-    @State private var selectedTab: Int = 2 // Default tab to "Profile"
+    @State private var selectedTab: Int = 4 // Default tab to "Profile"
 
     var body: some View {
         VStack {
@@ -105,7 +105,7 @@ struct ProfileView: View {
                         Image(systemName: "globe") // SF Symbol for "Explore"
                             .resizable() // Make the icon resizable
                             .scaledToFit() // Maintain aspect ratio
-                            .frame(width: 24, height: 24) // Make the icon bigger
+                            .frame(width: 35, height: 35) // Make the icon bigger
                             .foregroundColor(selectedTab == 0 ? .red : .gray)
 
                         Text("Explore") // Text under the icon
@@ -123,7 +123,7 @@ struct ProfileView: View {
                         Image(systemName: "message.fill") // SF Symbol for "Chats"
                             .resizable() // Make the icon resizable
                             .scaledToFit() // Maintain aspect ratio
-                            .frame(width: 24, height: 24) // Make the icon bigger
+                            .frame(width: 35, height: 35) // Make the icon bigger
                             .foregroundColor(selectedTab == 1 ? .red : .gray)
 
                         Text("Chats") // Text under the icon
@@ -144,7 +144,7 @@ struct ProfileView: View {
                         Image(systemName: "person.fill") // SF Symbol for "Profile"
                             .resizable() // Make the icon resizable
                             .scaledToFit() // Maintain aspect ratio
-                            .frame(width: 24, height: 24) // Make the icon bigger
+                            .frame(width: 35, height: 35) // Make the icon bigger
                             .foregroundColor(selectedTab == 2 ? .red : .gray)
 
                         Text("Profile") // Text under the icon
@@ -178,7 +178,7 @@ struct ProfileView: View {
         .background(Color(UIColor.systemGray6).edgesIgnoringSafeArea(.all))
         .navigationBarHidden(true)
         .onAppear {
-            selectedTab = 2 // Highlight the "Profile" tab when this view appears
+            selectedTab = 0 // Highlight the "Profile" tab when this view appears
         }
     }
 }
