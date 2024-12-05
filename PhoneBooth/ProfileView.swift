@@ -192,7 +192,7 @@ struct SectionCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            HStack(alignment: .center) {
+            HStack() {
                 // Space Between
                 Text(title)
                     .font(
@@ -205,13 +205,14 @@ struct SectionCard: View {
                 // Alternative Views and Spacers
                 Image(systemName: "pencil")
                     .foregroundColor(isWhite ? .black : .white)
+                    .padding(.trailing,20)
 //                    .frame(minWidth: 52, alignment: .trailing)
 
             }
 
             .padding(.vertical, 0)
-            .frame(width: 302, alignment: .center)
-            HStack(alignment: .center, spacing: 12) {
+//            .frame(width: 322, alignment: .center)
+            HStack(alignment: .center, spacing: 40) {
                 HStack(alignment: .center, spacing: 4) {
                     Text("02:15")
                     .font(
@@ -225,20 +226,22 @@ struct SectionCard: View {
                 .frame(height: 26, alignment: .center)
                 .background(isWhite ? Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.2) : Color(.white.opacity(0.2)))
                 .cornerRadius(15)
-                
+//                Spacer()
                 Image(isWhite ? "WaveChart" : "LightWaveChart")
-                    //.renderingMode(.template)
-                
+//                Spacer()
+
+//                    .padding(.leading,30)
                 Button(action:{}){
                     HStack(alignment: .center, spacing: 0) {
                         Image(systemName: "play.fill")
                             .foregroundColor(isWhite ? Color(red: 0.53, green: 0.49, blue: 0.46) : Color(.white))
                     }
-                    .padding(0)
+                   
                     .frame(width: 34, height: 34, alignment: .center)
                     .background(isWhite ? Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.2) : Color(.white.opacity(0.2)))
                     .cornerRadius(100)
                 }
+//                .padding(.leading,50)
 
             }
             .padding(.horizontal, 16)
