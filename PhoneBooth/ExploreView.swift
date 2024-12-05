@@ -41,25 +41,25 @@ struct ExploreView: View {
         NavigationView {
             VStack {
                 // Navigation Bar
-                HStack {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss() // Navigate back to the previous view
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.red)
-                            .font(.system(size: 18))
-                    }
-                    .frame(width: 50, alignment: .leading)
+//                HStack {
+//                    Button(action: {
+//                        presentationMode.wrappedValue.dismiss() // Navigate back to the previous view
+//                    }) {
+//                        Image(systemName: "chevron.left")
+//                            .foregroundColor(.red)
+//                            .font(.system(size: 18))
+//                    }
+//                    .frame(width: 50, alignment: .leading)
                     Spacer()
                     Text("Explore")
                         .font(.headline)
                         .foregroundColor(.black)
                         .frame(maxWidth: .infinity, alignment: .center)
-                    Spacer()
-                    Spacer() // Placeholder to center the title
-                        .frame(width: 50)
-                }
-                .padding()
+//                    Spacer()
+//                    Spacer() // Placeholder to center the title
+//                        .frame(width: 50)
+//                }
+//                .padding()
                 .navigationBarBackButtonHidden(true)
                 
                 Spacer()
