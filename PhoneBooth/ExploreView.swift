@@ -228,7 +228,7 @@ struct ExploreView: View {
                             Image(systemName: "globe") // SF Symbol for "Explore"
                                 .resizable() // Make the icon resizable
                                 .scaledToFit() // Maintain aspect ratio
-                                .frame(width: 24, height: 24) // Make the icon bigger
+                                .frame(width: 35, height: 35) // Make the icon bigger
                                 .foregroundColor(selectedTab == 0 ? .red : .gray)
 
                             Text("Explore") // Text under the icon
@@ -246,7 +246,7 @@ struct ExploreView: View {
                             Image(systemName: "message.fill") // SF Symbol for "Chats"
                                 .resizable() // Make the icon resizable
                                 .scaledToFit() // Maintain aspect ratio
-                                .frame(width: 24, height: 24) // Make the icon bigger
+                                .frame(width: 35, height: 35) // Make the icon bigger
                                 .foregroundColor(selectedTab == 1 ? .red : .gray)
 
                             Text("Chats") // Text under the icon
@@ -264,7 +264,7 @@ struct ExploreView: View {
                             Image(systemName: "person.fill") // SF Symbol for "Profile"
                                 .resizable() // Make the icon resizable
                                 .scaledToFit() // Maintain aspect ratio
-                                .frame(width: 24, height: 24) // Make the icon bigger
+                                .frame(width: 35, height: 35) // Make the icon bigger
                                 .foregroundColor(selectedTab == 2 ? .red : .gray)
 
                             Text("Profile") // Text under the icon
