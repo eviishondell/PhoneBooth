@@ -36,7 +36,7 @@ struct ExploreView: View {
     let audioFiles = ["Childhood Memory", "Favourite Childhood Food", "Life_s Motto", "Something you are proud of", "Teacher or mentor", "Work"]
 
     @State private var activeCardIndex: Int? = 1 // Track the active card index
-    @State private var selectedTab: Int = 2
+    @State private var selectedTab: Int = 0
     var body: some View {
         NavigationView {
             VStack {
@@ -137,23 +137,20 @@ struct ExploreView: View {
                                 .padding(.horizontal, 24)
                                 .padding(.vertical, 32)
                                 .frame(width: 320, height: 477, alignment: .leading)
-//                                .background(
-//                                    LinearGradient(
-//                                        stops: [
-//                                            Gradient.Stop(color: .black.opacity(0), location: 0.00),
-//                                            Gradient.Stop(color: .black.opacity(0.16), location: 1.00),
-//                                        ],
-//                                        startPoint: UnitPoint(x: 0, y: 0),
-//                                        endPoint: UnitPoint(x: 1, y: 1)
-//                                    )
-//                                )
-                                
-                                //.background(Color(hex: colors[index]))
                                 .background(Color(colors[index]))
                                 .background(.white)
                                 .cornerRadius(32)
                                 
-                                
+//                                .swipeActions(edge: .trailing) {
+//                                       Button(role: .destructive, action: {
+//                                           withAnimation {
+//                                               // Remove the card from the list
+//                                               promptCards.removeAll { $0 == index }
+//                                           }
+//                                       }) {
+//                                           Label("Delete", systemImage: "trash.fill")
+//                                       }
+//                                   }
                                 
                             }
                             //.containerRelativeFrame(.horizontal, count:1)
@@ -231,7 +228,7 @@ struct ExploreView: View {
                             Image(systemName: "globe") // SF Symbol for "Explore"
                                 .resizable() // Make the icon resizable
                                 .scaledToFit() // Maintain aspect ratio
-                                .frame(width: 35, height: 35) // Make the icon bigger
+                                .frame(width: 24, height: 24) // Make the icon bigger
                                 .foregroundColor(selectedTab == 0 ? .red : .gray)
 
                             Text("Explore") // Text under the icon
@@ -249,7 +246,7 @@ struct ExploreView: View {
                             Image(systemName: "message.fill") // SF Symbol for "Chats"
                                 .resizable() // Make the icon resizable
                                 .scaledToFit() // Maintain aspect ratio
-                                .frame(width: 35, height: 35) // Make the icon bigger
+                                .frame(width: 24, height: 24) // Make the icon bigger
                                 .foregroundColor(selectedTab == 1 ? .red : .gray)
 
                             Text("Chats") // Text under the icon
@@ -260,16 +257,14 @@ struct ExploreView: View {
                     .simultaneousGesture(TapGesture().onEnded {
                         selectedTab = 1
                     })
-                    
+
                     // Profile Tab
-                    Button(action: {
-                        selectedTab = 2 // Ensure "Profile" stays selected
-                    }) {
+                    NavigationLink(destination: ProfilePage()) {
                         VStack {
                             Image(systemName: "person.fill") // SF Symbol for "Profile"
                                 .resizable() // Make the icon resizable
                                 .scaledToFit() // Maintain aspect ratio
-                                .frame(width: 35, height: 35) // Make the icon bigger
+                                .frame(width: 24, height: 24) // Make the icon bigger
                                 .foregroundColor(selectedTab == 2 ? .red : .gray)
 
                             Text("Profile") // Text under the icon
@@ -277,6 +272,9 @@ struct ExploreView: View {
                                 .foregroundColor(selectedTab == 2 ? .red : .gray)
                         }
                     }
+                    .simultaneousGesture(TapGesture().onEnded {
+                        selectedTab = 2
+                    })
                 }
                 .padding(.top, 12)
                 .frame(height: 55.0)
@@ -288,6 +286,7 @@ struct ExploreView: View {
                     )
                 )
                 .ignoresSafeArea()
+
 
             }
             .background(

@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct ProfileView: View {
+struct ProfilePage: View {
     @Environment(\.presentationMode) var presentationMode // Access presentationMode for navigation
     @State private var selectedTab: Int = 2 // Default tab to "Profile"
 
@@ -14,29 +14,13 @@ struct ProfileView: View {
         VStack {
             // Header
             HStack {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss() // Navigate back to the previous view
-                }) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.red)
-                        .font(.system(size: 18))
-                }
-                .frame(width: 50, alignment: .leading)
-//                Spacer()
-                VStack {
-                    Text("Laurene")
+
+                    Text("My Profile")
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
+                        .frame(maxWidth: .infinity,alignment: .center)
                     
-                    Text("Female, 50 y.o.")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .padding(.top, 5)
-
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 75)
                 Spacer()
             }
             .padding()
@@ -80,23 +64,9 @@ struct ProfileView: View {
                         isWhite: false
                     )
                 }
-                .padding(.horizontal,24)
+                .padding(.horizontal)
             }
-            
-            // Footer Button with NavigationLink
-            NavigationLink(destination: ChatView()) {
-                Text("Start conversation")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.red)
-                    .cornerRadius(12)
-            }
-            .padding(.vertical, 10)
-            .padding(.horizontal,24)
-            
+
             Divider()
             HStack(alignment: .center, spacing: 90) { // Increase spacing between icons
                 // Explore Tab
@@ -105,7 +75,7 @@ struct ProfileView: View {
                         Image(systemName: "globe") // SF Symbol for "Explore"
                             .resizable() // Make the icon resizable
                             .scaledToFit() // Maintain aspect ratio
-                            .frame(width: 24, height: 24) // Make the icon bigger
+                            .frame(width: 35, height: 35) // Make the icon bigger
                             .foregroundColor(selectedTab == 0 ? .red : .gray)
 
                         Text("Explore") // Text under the icon
@@ -123,7 +93,7 @@ struct ProfileView: View {
                         Image(systemName: "message.fill") // SF Symbol for "Chats"
                             .resizable() // Make the icon resizable
                             .scaledToFit() // Maintain aspect ratio
-                            .frame(width: 24, height: 24) // Make the icon bigger
+                            .frame(width: 35, height: 35) // Make the icon bigger
                             .foregroundColor(selectedTab == 1 ? .red : .gray)
 
                         Text("Chats") // Text under the icon
@@ -144,7 +114,7 @@ struct ProfileView: View {
                         Image(systemName: "person.fill") // SF Symbol for "Profile"
                             .resizable() // Make the icon resizable
                             .scaledToFit() // Maintain aspect ratio
-                            .frame(width: 24, height: 24) // Make the icon bigger
+                            .frame(width: 35, height: 35) // Make the icon bigger
                             .foregroundColor(selectedTab == 2 ? .red : .gray)
 
                         Text("Profile") // Text under the icon
@@ -183,102 +153,9 @@ struct ProfileView: View {
     }
 }
 
-struct SectionCard: View {
-    let title: String
-    let backgroundColor: String
-    let audioTime: String
-    let description: String
-    let isWhite: Bool
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack(alignment: .center) {
-                // Space Between
-                Text(title)
-                    .font(
-                        Font.custom("SF Pro", size: 20)
-                            .weight(.semibold)
-                    )
-                    .foregroundColor(isWhite ? Color(red: 0.92, green: 0.29, blue: 0.35) : Color.white)
-                
-                Spacer()
-                // Alternative Views and Spacers
-                Image(systemName: "pencil")
-                    .foregroundColor(isWhite ? .black : .white)
-//                    .frame(minWidth: 52, alignment: .trailing)
 
-            }
-
-            .padding(.vertical, 0)
-            .frame(width: 302, alignment: .center)
-            HStack(alignment: .center, spacing: 12) {
-                HStack(alignment: .center, spacing: 4) {
-                    Text("02:15")
-                    .font(
-                    Font.custom("SF Pro", size: 12)
-                    .weight(.medium)
-                    )
-                    .foregroundColor(isWhite ? Color(red: 0.53, green: 0.49, blue: 0.46) : Color(.white))
-                }
-                .padding(.horizontal, 8)
-                .padding(.vertical, 0)
-                .frame(height: 26, alignment: .center)
-                .background(isWhite ? Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.2) : Color(.white.opacity(0.2)))
-                .cornerRadius(15)
-                
-                Image(isWhite ? "WaveChart" : "LightWaveChart")
-                    //.renderingMode(.template)
-                
-                Button(action:{}){
-                    HStack(alignment: .center, spacing: 0) {
-                        Image(systemName: "play.fill")
-                            .foregroundColor(isWhite ? Color(red: 0.53, green: 0.49, blue: 0.46) : Color(.white))
-                    }
-                    .padding(0)
-                    .frame(width: 34, height: 34, alignment: .center)
-                    .background(isWhite ? Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.2) : Color(.white.opacity(0.2)))
-                    .cornerRadius(100)
-                }
-
-            }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .background(isWhite ? Color(red: 0.47, green: 0.47, blue: 0.5).opacity(0.1) : Color(.white.opacity(0.1)))
-            .cornerRadius(20)
-            
-            
-        }
-        
-        .padding(20)
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .background(!isWhite ?
-        LinearGradient(
-        stops: [
-        Gradient.Stop(color: .black.opacity(0), location: 0.00),
-        Gradient.Stop(color: .black.opacity(0.16), location: 1.00),
-        ],
-        startPoint: UnitPoint(x: 0, y: 0),
-        endPoint: UnitPoint(x: 1, y: 1)
-        ) :
-                        LinearGradient(
-                        stops: [
-                        Gradient.Stop(color: .black.opacity(0), location: 0.00),
-                        Gradient.Stop(color: .black.opacity(0), location: 0.00),
-                        ],
-                        startPoint: UnitPoint(x: 0, y: 0),
-                        endPoint: UnitPoint(x: 0, y: 0)
-                        )
-        )
-        .background(Color(backgroundColor))
-        .cornerRadius(25)
-        
-    }
-}
-
-
-struct ProfileView_Previews: PreviewProvider {
+struct ProfilePage_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfilePage()
     }
 }

@@ -6,6 +6,7 @@
 // Updated by Aarnav Sangekar on 11/22/24
 import SwiftUI
 
+
 struct ChatListView: View {
     
     @Environment(\.presentationMode) var presentationMode // Access presentationMode for navigation
@@ -95,9 +96,7 @@ struct ChatListView: View {
                 })
                 
                 // Profile Tab
-                Button(action: {
-                    selectedTab = 2 // Ensure "Profile" stays selected
-                }) {
+                NavigationLink(destination: ProfilePage()) {
                     VStack {
                         Image(systemName: "person.fill") // SF Symbol for "Profile"
                             .resizable() // Make the icon resizable
@@ -110,6 +109,9 @@ struct ChatListView: View {
                             .foregroundColor(selectedTab == 2 ? .red : .gray)
                     }
                 }
+                .simultaneousGesture(TapGesture().onEnded {
+                    selectedTab = 2
+                })
             }
             .padding(.top, 12)
             .frame(height: 55.0)
@@ -121,6 +123,7 @@ struct ChatListView: View {
                 )
             )
             .ignoresSafeArea()
+
 
         }
         .background(
